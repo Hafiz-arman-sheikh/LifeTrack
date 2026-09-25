@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Login | LifeTrack</title>
+
+  <link rel="stylesheet" href="auth.css" />
+</head>
+
+<body>
+
+  <div class="auth-container">
+
+    <!-- Left Side -->
+    <div class="auth-left">
+
+      <div class="brand">
+        <div class="brand-icon">✓</div>
+        <span>LifeTrack</span>
+      </div>
+
+      <div class="hero-content">
+        <span class="badge">SMART LIFE MANAGEMENT</span>
+
+        <h1>
+          Never forget<br />
+          <span>what matters.</span>
+        </h1>
+
+        <p>
+          Manage your reminders, bills, maintenance,
+          family tasks and important dates — all in one place.
+        </p>
+
+        <div class="features">
+
+          <div class="feature">
+            <div class="feature-icon">⏰</div>
+            <div>
+              <strong>Smart Reminders</strong>
+              <small>Set your own date and time.</small>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">📊</div>
+            <div>
+              <strong>Everything Organized</strong>
+              <small>Manage your personal & business tasks.</small>
+            </div>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">🔔</div>
+            <div>
+              <strong>Never Miss Important Things</strong>
+              <small>Get reminders when they are due.</small>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="copyright">
+        © 2026 LifeTrack. All rights reserved.
+      </div>
+
+    </div>
+
+
+    <!-- Right Side -->
+    <div class="auth-right">
+
+      <div class="auth-box">
+
+        <!-- LOGIN -->
+        <div id="loginForm">
+
+          <div class="mobile-brand">
+            <div class="brand-icon">✓</div>
+            <span>LifeTrack</span>
+          </div>
+
+          <h2>Welcome back 👋</h2>
+
+          <p class="auth-subtitle">
+            Sign in to continue to your LifeTrack dashboard.
+          </p>
+
+
+          <button class="google-btn" onclick="googleLogin()">
+            <span class="google-icon">G</span>
+            Continue with Google
+          </button>
+
+          <div class="divider">
+            <span>or continue with email</span>
+          </div>
+
+
+          <form onsubmit="loginUser(event)">
+
+            <div class="input-group">
+              <label>Email Address</label>
+              <input
+                type="email"
+                id="loginEmail"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
+
+
+            <div class="input-group">
+              <div class="label-row">
+                <label>Password</label>
+
+                <a href="#" onclick="forgotPassword(event)">
+                  Forgot password?
+                </a>
+              </div>
+
+              <div class="password-box">
+
+                <input
+                  type="password"
+                  id="loginPassword"
+                  placeholder="Enter your password"
+                  required
+                />
+
+                <button
+                  type="button"
+                  class="eye-btn"
+                  onclick="togglePassword('loginPassword', this)"
+                >
+                  👁
+                </button>
+
+              </div>
+            </div>
+
+
+            <button class="primary-btn" type="submit">
+              Sign In
+            </button>
+
+          </form>
+
+
+          <p class="switch-text">
+            Don't have an account?
+            <button onclick="showSignup()">Create account</button>
+          </p>
+
+        </div>
+
+        <div class="guest-login">
+  <span>Just want to explore?</span>
+
+  <button
+    type="button"
+    onclick="continueAsGuest()"
+  >
+    Continue as Guest →
+  </button>
+</div>
+
+
+        <!-- SIGNUP -->
+        <div id="signupForm" class="hidden">
+
+          <div class="mobile-brand">
+            <div class="brand-icon">✓</div>
+            <span>LifeTrack</span>
+          </div>
+
+          <h2>Create your account 🚀</h2>
+
+          <p class="auth-subtitle">
+            Start organizing your life with LifeTrack.
+          </p>
+
+
+          <button class="google-btn" onclick="googleLogin()">
+            <span class="google-icon">G</span>
+            Continue with Google
+          </button>
+
+
+          <div class="divider">
+            <span>or create with email</span>
+          </div>
+
+
+          <form onsubmit="signupUser(event)">
+
+            <div class="input-group">
+              <label>Full Name</label>
+
+              <input
+                type="text"
+                id="signupName"
+                placeholder="Your name"
+                required
+              />
+            </div>
+
+
+            <div class="input-group">
+              <label>Email Address</label>
+
+              <input
+                type="email"
+                id="signupEmail"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
+
+
+            <div class="input-group">
+              <label>Password</label>
+
+              <div class="password-box">
+
+                <input
+                  type="password"
+                  id="signupPassword"
+                  placeholder="Create a password"
+                  minlength="6"
+                  required
+                />
+
+                <button
+                  type="button"
+                  class="eye-btn"
+                  onclick="togglePassword('signupPassword', this)"
+                >
+                  👁
+                </button>
+
+              </div>
+            </div>
+
+
+            <button class="primary-btn" type="submit">
+              Create Account
+            </button>
+
+          </form>
+
+
+          <p class="switch-text">
+            Already have an account?
+            <button onclick="showLogin()">Sign in</button>
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div id="toast" class="toast"></div>
+
+  <script src="dist/auth.js"></script>
+
+</body>
+</html>

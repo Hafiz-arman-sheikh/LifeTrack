@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="LifeTrack - Manage your personal, family and business reminders."
+    >
+
+    <title>LifeTrack</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">✓</div>
+
+            <div>
+                <h2>LifeTrack</h2>
+                <span>Never forget what matters.</span>
+            </div>
+        </div>
+
+        <nav class="navigation">
+
+            <button class="nav-item active" data-page="dashboard">
+                <span>⌂</span>
+                <span data-i18n="dashboard">Dashboard</span>
+            </button>
+
+            <button class="nav-item" data-page="reminders">
+                <span>◷</span>
+                <span data-i18n="reminders">Reminders</span>
+            </button>
+
+            <button class="nav-item" data-page="categories">
+                <span>▦</span>
+                <span data-i18n="categories">Categories</span>
+            </button>
+
+            <button class="nav-item" data-page="history">
+                <span>↺</span>
+                <span data-i18n="history">History</span>
+            </button>
+
+        </nav>
+        
+
+        <div class="sidebar-bottom">
+
+            <button class="nav-item" id="themeBtn">
+                <span id="themeIcon">☾</span>
+                <span data-i18n="   kMode">Dark Mode</span>
+            </button>
+
+            <div class="language-box">
+
+                <label for="languageSelect" data-i18n="language">
+                    Language
+                </label>
+
+                <select id="languageSelect">
+                    <option value="en">English</option>
+                    <option value="roman">Roman Urdu</option>
+                </select>
+
+            </div>
+
+        </div>
+         <button class="logout-btn" onclick="logoutUser()">
+    Logout
+    </button>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div class="mobile-logo">
+                <div class="logo-icon">✓</div>
+                <strong>LifeTrack</strong>
+            </div>
+
+            <div class="top-actions">
+
+                <button
+                    class="icon-btn"
+                    id="notificationBtn"
+                    title="Enable notifications"
+                >
+                    🔔
+                </button>
+
+                <button
+                    class="profile-btn"
+                    title="Profile"
+                >
+                    <span class="avatar">G</span>
+                    <span>User</span>
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section id="dashboardPage" class="page active-page">
+
+            <div class="welcome">
+
+                <div>
+                    <p class="small-text" data-i18n="welcomeBack">
+                        Welcome back
+                    </p>
+
+                    <h1>
+                        <h1 id="welcomeUser">Good Morning, Guest 👋</h1>
+                    </h1>
+
+                    <p class="subtitle" data-i18n="dashboardSubtitle">
+                        Here's what needs your attention.
+                    </p>
+                </div>
+
+                <button class="primary-btn" id="openAddReminder">
+                    + <span data-i18n="addReminder">Add Reminder</span>
+                </button>
+
+            </div>
+            
+               
+
+
+            <!-- STATS -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">◷</div>
+
+                    <div>
+                        <span data-i18n="activeReminders">
+                            Active Reminders
+                        </span>
+
+                        <strong id="totalReminders">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">!</div>
+
+                    <div>
+                        <span data-i18n="dueSoon">
+                            Due Soon
+                        </span>
+
+                        <strong id="dueSoon">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon red">⚠</div>
+
+                    <div>
+                        <span data-i18n="overdue">
+                            Overdue
+                        </span>
+
+                        <strong id="overdue">0</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">✓</div>
+
+                    <div>
+                        <span data-i18n="completed">
+                            Completed
+                        </span>
+
+                        <strong id="completed">0</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- UPCOMING -->
+
+            <div class="section-header">
+
+                <div>
+                    <h2 data-i18n="upcoming">
+                        Upcoming
+                    </h2>
+
+                    <p data-i18n="upcomingSubtitle">
+                        Your next important reminders
+                    </p>
+                </div>
+
+                <button
+                    class="text-btn"
+                    id="viewAllBtn"
+                    data-i18n="viewAll"
+                >
+                    View All
+                </button>
+
+            </div>
+
+
+            <div id="upcomingList" class="reminder-grid">
+                <!-- TypeScript will insert cards -->
+            </div>
+
+        </section>
+
+
+        <!-- ================= REMINDERS PAGE ================= -->
+
+        <section id="remindersPage" class="page">
+
+            <div class="page-heading">
+
+                <div>
+                    <h1 data-i18n="allReminders">
+                        All Reminders
+                    </h1>
+
+                    <p data-i18n="manageReminders">
+                        Manage everything in one place.
+                    </p>
+                </div>
+
+                <button class="primary-btn" id="openAddReminder2">
+                    + <span data-i18n="addReminder">Add Reminder</span>
+                </button>
+
+            </div>
+
+
+            <div class="toolbar">
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search reminders..."
+                >
+
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                    <option value="home">Home</option>
+                    <option value="vehicle">Vehicle</option>
+                    <option value="payment">Payment</option>
+                    <option value="family">Family</option>
+                    <option value="business">Business</option>
+                    <option value="health">Health</option>
+                    <option value="subscription">Subscription</option>
+                    <option value="document">Documents</option>
+                    <option value="maintenance">Maintenance</option>
+                    <option value="custom">Custom</option>
+                </select>
+
+            </div>
+
+
+            <div id="allRemindersList" class="reminder-grid"></div>
+
+        </section>
+
+
+        <!-- ================= CATEGORIES ================= -->
+
+        <section id="categoriesPage" class="page">
+
+            <div class="page-heading">
+
+                <div>
+                    <h1 data-i18n="categories">
+                        Categories
+                    </h1>
+
+                    <p>
+                        Organize your life your way.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="category-grid">
+
+                <div class="category-card">
+                    <span>🏠</span>
+                    <h3>Home</h3>
+                    <p>Rent, bills, maintenance</p>
+                </div>
+
+                <div class="category-card">
+                    <span>🚗</span>
+                    <h3>Vehicle</h3>
+                    <p>Oil, service, tyres</p>
+                </div>
+
+                <div class="category-card">
+                    <span>💰</span>
+                    <h3>Payment</h3>
+                    <p>Bills and installments</p>
+                </div>
+
+                <div class="category-card">
+                    <span>👨‍👩‍👧</span>
+                    <h3>Family</h3>
+                    <p>School and family tasks</p>
+                </div>
+
+                <div class="category-card">
+                    <span>💼</span>
+                    <h3>Business</h3>
+                    <p>Salary, rent and suppliers</p>
+                </div>
+
+                <div class="category-card">
+                    <span>🏥</span>
+                    <h3>Health</h3>
+                    <p>Appointments and medicines</p>
+                </div>
+
+                <div class="category-card">
+                    <span>📱</span>
+                    <h3>Subscription</h3>
+                    <p>Internet and subscriptions</p>
+                </div>
+
+                <div class="category-card">
+                    <span>📄</span>
+                    <h3>Documents</h3>
+                    <p>Renewals and expiry dates</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= HISTORY ================= -->
+
+        <section id="historyPage" class="page">
+
+            <div class="page-heading">
+
+                <div>
+                    <h1 data-i18n="history">
+                        History
+                    </h1>
+
+                    <p>
+                        Your completed reminders.
+                    </p>
+                </div>
+
+            </div>
+
+            <div id="historyList" class="history-list"></div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= ADD REMINDER MODAL ================= -->
+
+    <div class="modal-overlay" id="modal">
+
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <div>
+                    <h2 data-i18n="newReminder">
+                        New Reminder
+                    </h2>
+
+                    <p>
+                        Set your own date and time.
+                    </p>
+                </div>
+
+                <button class="close-btn" id="closeModal">
+                    ×
+                </button>
+
+            </div>
+
+
+            <form id="reminderForm">
+
+                <div class="form-group">
+
+                    <label for="title">
+                        Reminder Name
+                    </label>
+
+                    <input
+                        id="title"
+                        type="text"
+                        placeholder="e.g. Car Oil Change"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="category">
+                        Category
+                    </label>
+
+                    <select id="category" required>
+
+                        <option value="home">🏠 Home</option>
+                        <option value="vehicle">🚗 Vehicle</option>
+                        <option value="payment">💰 Payment</option>
+                        <option value="family">👨‍👩‍👧 Family</option>
+                        <option value="business">💼 Business</option>
+                        <option value="health">🏥 Health</option>
+                        <option value="subscription">📱 Subscription</option>
+                        <option value="document">📄 Documents</option>
+                        <option value="maintenance">🔧 Maintenance</option>
+                        <option value="custom">🎯 Custom</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="lastDate">
+                            Last Done
+                        </label>
+
+                        <input
+                            id="lastDate"
+                            type="date"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="reminderDate">
+                            Next Reminder
+                        </label>
+
+                        <input
+                            id="reminderDate"
+                            type="date"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="reminderTime">
+                            Reminder Time
+                        </label>
+
+                        <input
+                            id="reminderTime"
+                            type="time"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="cost">
+                            Cost (Optional)
+                        </label>
+
+                        <input
+                            id="cost"
+                            type="number"
+                            placeholder="0"
+                            min="0"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="notes">
+                        Notes
+                    </label>
+
+                    <textarea
+                        id="notes"
+                        rows="3"
+                        placeholder="Add additional information..."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="alarm-info">
+
+                    <span>🔔</span>
+
+                    <div>
+                        <strong>Custom Alarm</strong>
+
+                        <p>
+                            You decide exactly when you want to be reminded.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-btn"
+                        id="cancelModal"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Save Reminder
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= ALARM ================= -->
+
+    <div id="alarmToast" class="alarm-toast">
+
+        <div class="alarm-icon">
+            🔔
+        </div>
+
+        <div>
+            <strong id="alarmTitle">
+                Reminder
+            </strong>
+
+            <p>
+                It's time for your reminder.
+            </p>
+        </div>
+
+        <button id="closeAlarm">
+            ×
+        </button>
+
+    </div>
+
+
+    <script src="dist/app.js"></script>
+
+</body>
+</html>
